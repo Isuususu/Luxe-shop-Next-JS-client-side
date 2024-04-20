@@ -39,60 +39,60 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      {/* <UserProvider> */}
-      <body suppressHydrationWarning={true}>
-        <StateContext>
-          {mobile ? (
-            <>
-              <Toaster />
-              <Navbar />
-              <Search />
-              {children}
-              <Footer />
-            </>
-          ) : (
-            <div
-              style={{
-                height: "100vh",
-                display: "flex",
-                background: "#ffcd45",
-              }}
-            >
-              <div className="desktop-layout" id="desktop-layout">
-                <div style={{ transform: "scale(1)" }}>
-                  <Toaster />
-                  <Navbar mobile={false} />
-                  <Search ref={innerWrapperReference} />
-                  <div
-                    className={
-                      !mobile ? "desktop-layout__inner-wrapper" : ""
-                    }
-                    ref={innerWrapperRef}
-                  >
-                    <Image
-                      src="/images/notch.png"
-                      alt=""
-                      width={113}
-                      height={30}
-                      style={{
-                        zIndex: "99",
-                        position: "absolute",
-                        left: "50%",
-                        top: "20px",
-                        transform: "translate(-50%)",
-                      }}
-                    />
-                    {children}
-                  </div>
+      <UserProvider>
+        <body suppressHydrationWarning={true}>
+          <StateContext>
+            {mobile ? (
+              <>
+                <Toaster />
+                <Navbar />
+                <Search />
+                {children}
+                <Footer />
+              </>
+            ) : (
+              <div
+                style={{
+                  height: "100vh",
+                  display: "flex",
+                  background: "#ffcd45",
+                }}
+              >
+                <div className="desktop-layout" id="desktop-layout">
+                  <div style={{ transform: "scale(1)" }}>
+                    <Toaster />
+                    <Navbar mobile={false} />
+                    <Search ref={innerWrapperReference} />
+                    <div
+                      className={
+                        !mobile ? "desktop-layout__inner-wrapper" : ""
+                      }
+                      ref={innerWrapperRef}
+                    >
+                      <Image
+                        src="/images/notch.png"
+                        alt=""
+                        width={113}
+                        height={30}
+                        style={{
+                          zIndex: "99",
+                          position: "absolute",
+                          left: "50%",
+                          top: "20px",
+                          transform: "translate(-50%)",
+                        }}
+                      />
+                      {children}
+                    </div>
 
-                  {/* <Footer /> */}
+                    {/* <Footer /> */}
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
-        </StateContext>
-      </body>
-      {/* </UserProvider> */}
+            )}
+          </StateContext>
+        </body>
+      </UserProvider>
     </html>
   );
 }
