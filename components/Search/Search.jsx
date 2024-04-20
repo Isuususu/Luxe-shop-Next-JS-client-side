@@ -19,9 +19,16 @@ const Search = forwardRef((props, ref) => {
 
   const [homeContainerRef, setHomeContainerRef] = useState(null);
 
-  //Define desktop or mobile layout
-  const windowWidth = window.innerWidth;
+  //Check is user using mobile device or desktop to define layout
+  const [windowWidth, setWindowWidth] = useState("");
+  useEffect(() => {
+    if (typeof window != "undefined") {
+      const windowWidth = window.innerWidth;
+      setWindowWidth(windowWidth);
+    }
+  }, [windowWidth]);
   const mobile = windowWidth < 500;
+  console.log(windowWidth, mobile);
 
   //Handling searchbar animation
   const { scrollY } = useScroll(
