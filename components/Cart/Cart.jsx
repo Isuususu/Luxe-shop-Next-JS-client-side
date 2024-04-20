@@ -31,27 +31,31 @@ const Cart = ({ mobile }) => {
   const handleCheckout = async () => {
     const stripe = await getStripe();
 
-    const response = await fetch("/api/stripe_checkout", {
+    await fetch("/api/stripe_checkout", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(cartItems),
-    });
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((response) => console.log(response));
 
-    console.log(response);
+    // console.log(response);
 
-    if (!response.ok) {
-      console.error("Failed to fetch data:", response.statusText);
-      return;
-    }
+    // if (!response.ok) {
+    //   console.error("Failed to fetch data:", response.statusText);
+    //   return;
+    // }
 
-    const data = await response.json();
+    // const data = await response.json();
 
-    toast.loading("Redirecting...");
+    // toast.loading("Redirecting...");
 
-    stripe.redirectToCheckout({ sessionId: data.id });
-    console.log("Testing stripe");
+    // stripe.redirectToCheckout({ sessionId: data.id });
+    // console.log("Testing stripe");
   };
 
   return (

@@ -26,6 +26,7 @@ import "swiper/css/grid";
 
 // import required modules
 import { Grid } from "swiper/modules";
+import Footer from "../components/Footer/Footer";
 
 export default function Index() {
   const [category, setCategory] = useState("All");
@@ -137,6 +138,7 @@ export default function Index() {
           </Swiper>
         </>
       </div>
+      <Footer />
     </div>
   );
 }
