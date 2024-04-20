@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
   //Check is user using mobile device or desktop to define layout
   const [windowWidth, setWindowWidth] = useState("");
   useEffect(() => {
-    if (window) {
+    if (typeof window != "undefined") {
       const windowWidth = window.innerWidth;
       setWindowWidth(windowWidth);
     }
