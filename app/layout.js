@@ -17,8 +17,15 @@ import Search from "../components/Search/Search";
 
 export default function RootLayout({ children }) {
   //Check is user using mobile device or desktop to define layout
-  const windowWidth = window.innerWidth;
+  const [windowWidth, setWindowWidth] = useState("");
+  useEffect(() => {
+    if (window) {
+      const windowWidth = window.innerWidth;
+      setWindowWidth(windowWidth);
+    }
+  }, [windowWidth]);
   const mobile = windowWidth < 500;
+  console.log(windowWidth, mobile);
 
   //This is a reference to inner wrapper to keep searchbar animation logic
   const [innerWrapperReference, setInnerWrapperReference] =
