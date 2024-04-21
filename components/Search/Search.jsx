@@ -9,15 +9,20 @@ import { urlFor } from "../../lib/client";
 import Link from "next/link";
 import { useStateContext } from "../../context/StateContext";
 import Image from "next/image";
+import getProducts from "../../lib/utils";
 
-const Search = forwardRef((props, ref) => {
+const Search = forwardRef((ref) => {
   Search.displayName = "Search";
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const data = getProducts();
+    data.then((products) => setProducts(products));
+  }, []);
 
   const { searchBar, setSearchBar } = useStateContext();
 
   const [matchingProducts, setMatchingProducts] = useState([]);
-
-  const [homeContainerRef, setHomeContainerRef] = useState(null);
 
   //Check is user using mobile device or desktop to define layout
   const [windowWidth, setWindowWidth] = useState("");
@@ -28,7 +33,6 @@ const Search = forwardRef((props, ref) => {
     }
   }, [windowWidth]);
   const mobile = windowWidth < 500;
-  console.log(windowWidth, mobile);
 
   //Handling searchbar animation
   const { scrollY } = useScroll(

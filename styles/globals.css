@@ -802,14 +802,6 @@ input {
   border-radius: 0 25px 25px 0;
 }
 
-.cl-card {
-  box-shadow: 0px 22px 19px -15px rgba(110, 38, 243, 0.164);
-}
-
-.cl-internal-q12r8z {
-  will-change: auto;
-}
-
 .overflow-auto {
   overflow: scroll;
 }

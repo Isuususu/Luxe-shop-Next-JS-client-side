@@ -5,7 +5,7 @@ import "../styles/globals.css";
 import { Toaster } from "react-hot-toast";
 import Footer from "../components/Footer/Footer";
 import Navbar from "../components/Navbar/Navbar";
-import SearchForm from "./search/SearchForm";
+
 import { UserProvider } from "@auth0/nextjs-auth0/client";
 import Image from "next/image";
 import Search from "../components/Search/Search";
@@ -25,7 +25,6 @@ export default function RootLayout({ children }) {
     }
   }, [windowWidth]);
   const mobile = windowWidth < 500;
-  console.log(windowWidth, mobile);
 
   //This is a reference to inner wrapper to keep searchbar animation logic
   const [innerWrapperReference, setInnerWrapperReference] =

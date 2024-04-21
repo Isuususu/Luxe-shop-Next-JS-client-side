@@ -75,6 +75,8 @@ export const StateContext = ({ children }) => {
     }
   }, [cartItems]);
 
+  console.log(cartItems);
+
   const [clientSideData, setClientSideData] = useState([]);
   const [clientSideQuantity, setClientSideQuantity] = useState();
   const [clientSidePrice, setClientsidePrice] = useState();
@@ -130,42 +132,35 @@ export const StateContext = ({ children }) => {
   //
 
   const updateCartItemQuantity = (id, value) => {
-    matchingProduct = cartItems.find((item) => item._id === id);
-    matchingProductIndex = cartItems.findIndex(
+    const matchingProductIndex = cartItems.findIndex(
       (product) => product._id === id
     );
-    //Remove not updated element and replace it with new one so products are
-    //not duplicating
-    const newCardItems = cartItems.filter((item) => item._id !== id);
-    //Incrementing item quantity
-    if (value === "increment") {
-      setCartItems([
-        ...newCardItems,
-        {
-          ...matchingProduct,
-          quantity: matchingProduct.quantity + 1,
-        },
-      ]);
-      setTotalPrice(
-        (prevTotalPrice) => prevTotalPrice + matchingProduct.price
-      );
-      setTotalQuantities((prev) => prev + 1);
-      //Decrementing item quantity
-    } else if (
-      value === "decrement" &&
-      matchingProduct.quantity > 1
-    ) {
-      setCartItems([
-        ...newCardItems,
-        {
-          ...matchingProduct,
-          quantity: matchingProduct.quantity - 1,
-        },
-      ]);
-      setTotalPrice(
-        (prevTotalPrice) => prevTotalPrice - matchingProduct.price
-      );
-      setTotalQuantities((prev) => prev - 1);
+
+    if (matchingProductIndex !== -1) {
+      const updatedCartItems = [...cartItems];
+      const matchingProduct = {
+        ...updatedCartItems[matchingProductIndex],
+      };
+
+      if (value === "increment") {
+        matchingProduct.quantity++;
+        setTotalPrice(
+          (prevTotalPrice) => prevTotalPrice + matchingProduct.price
+        );
+        setTotalQuantities((prev) => prev + 1);
+      } else if (
+        value === "decrement" &&
+        matchingProduct.quantity > 1
+      ) {
+        matchingProduct.quantity--;
+        setTotalPrice(
+          (prevTotalPrice) => prevTotalPrice - matchingProduct.price
+        );
+        setTotalQuantities((prev) => prev - 1);
+      }
+
+      updatedCartItems[matchingProductIndex] = matchingProduct;
+      setCartItems(updatedCartItems);
     }
   };
 
