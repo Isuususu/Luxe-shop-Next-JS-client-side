@@ -20,15 +20,15 @@ const Product = ({ product, cardSmall }) => {
   };
 
   return (
-    <Link href={`/product/${product.slug.current}`}>
-      <motion.div
-        className={`product-card ${
-          cardSmall === true ? "small-card" : ""
-        }`}
-        initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.5 }}
-      >
+    <motion.div
+      className={`product-card ${
+        cardSmall === true ? "small-card" : ""
+      }`}
+      initial={{ opacity: 0, scale: 0.5 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.5 }}
+    >
+      <Link href={`/product/${product.slug.current}`}>
         <Image
           src={urlFor(product.image && product.image[0]).toString()}
           fill
@@ -62,8 +62,8 @@ const Product = ({ product, cardSmall }) => {
             fontSize={cardSmall === true ? "1.5rem" : "2rem"}
           />
         </button>
-      </motion.div>
-    </Link>
+      </Link>
+    </motion.div>
   );
 };
 

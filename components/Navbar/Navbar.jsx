@@ -38,22 +38,6 @@ const Navbar = ({ mobile }) => {
 
   return (
     <>
-      <button
-        className={`shopping-cart-icon ${
-          mobile === false ? "shopping-cart-icon__desktop" : ""
-        }`}
-        onClick={() => setShowCart(!showCart)}
-      >
-        <FaShoppingBag style={{ fontSize: "2.3rem" }} />
-
-        <span className="shopping-cart-icon__qty">
-          {totalQuantities}
-        </span>
-      </button>
-      <AnimatePresence mode="wait">
-        {showCart && <Cart key={"shopping-cart"} mobile={mobile} />}
-      </AnimatePresence>
-
       {!showNavbarBottom ? (
         <div
           className={`navbar-bottom ${
@@ -81,20 +65,9 @@ const Navbar = ({ mobile }) => {
           >
             <TiThMenu />
           </button>
-          {/* <button
-            className="shopping-cart-icon"
-            onClick={() => setShowCart(!showCart)}
-          >
-            <FaShoppingBag style={{ fontSize: "2.3rem" }} />
-
-            <span className="shopping-cart-icon__qty">
-              {totalQuantities}
-            </span>
-          </button> */}
 
           <AnimatePresence mode="wait">
             {showMenu && <Menu key={"menu"} />}
-            {/* {showCart && <Cart key={"shopping-cart"} />} */}
           </AnimatePresence>
         </div>
       ) : null}

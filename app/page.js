@@ -27,6 +27,7 @@ import "swiper/css/grid";
 // import required modules
 import { Grid } from "swiper/modules";
 import Footer from "../components/Footer/Footer";
+import { AnimatePresence } from "framer-motion";
 
 export default function Index() {
   const [category, setCategory] = useState("All");
@@ -73,6 +74,7 @@ export default function Index() {
       id="home-container"
     >
       <h2 className="home-container__headline">Best sellers</h2>
+
       <div className="home-container__products">
         <Swiper
           slidesPerView={1}
@@ -92,7 +94,9 @@ export default function Index() {
             (product) =>
               product.stars >= 4 && (
                 <SwiperSlide key={product._id}>
-                  <Product product={product} key={product._id} />
+                  <AnimatePresence mode="wait">
+                    <Product product={product} key={product._id} />
+                  </AnimatePresence>
                 </SwiperSlide>
               )
           )}

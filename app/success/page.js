@@ -1,9 +1,8 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
 import { useStateContext } from "../../context/StateContext";
-
-import { runConfetti } from "../../lib/utils";
 
 const Succsess = () => {
   const { setCartItems, setTotalPrice, setTotalQuantities } =
@@ -14,7 +13,6 @@ const Succsess = () => {
     setCartItems([]);
     setTotalPrice(0);
     setTotalQuantities(0);
-    runConfetti();
   }, []);
 
   return (
@@ -22,7 +20,9 @@ const Succsess = () => {
       <h3>Payment successful</h3>
       <p>Check your email for the receipt.</p>
       <Link href="/">
-        <button>Continue shopping</button>
+        <button className="success-page__button">
+          Continue shopping
+        </button>
       </Link>
     </div>
   );

@@ -61,6 +61,39 @@ input {
   font-family: "Open Sans", sans-serif;
 }
 
+.loading-page {
+  background: $homeBg;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  &__spin {
+    display: inline-block;
+    width: 60px;
+    aspect-ratio: 1/1;
+    &::after {
+      content: "";
+      display: block;
+      width: 50px;
+      aspect-ratio: 1/1;
+      border: 5px solid #333;
+      border-radius: 50%;
+      border-color: #333 transparent #333 transparent;
+      animation: rotateSpin 1s linear infinite;
+    }
+  }
+}
+
+@keyframes rotateSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .shopping-cart-icon {
   @include shoppingCartIcon;
 }
@@ -155,6 +188,19 @@ input {
 // }
 
 @media screen and (max-height: 820px) {
+  .product-detail-container {
+    &__details {
+      &__buying-options {
+        border-radius: 0 0 43px 43px;
+      }
+    }
+  }
+  .desktop-menu-container {
+    border-radius: 0 43px 43px 0;
+    &__avatar {
+      border-radius: 0 43px 0 0;
+    }
+  }
   .desktop-layout {
     height: 730px;
     width: 400px;
@@ -180,6 +226,19 @@ input {
 }
 
 @media screen and (min-height: 820px) {
+  .product-detail-container {
+    &__details {
+      &__buying-options {
+        border-radius: 0 0 53px 53px;
+      }
+    }
+  }
+  .desktop-menu-container {
+    border-radius: 0 53px 53px 0;
+    &__avatar {
+      border-radius: 0 53px 0 0;
+    }
+  }
   .desktop-layout {
     height: 830px;
     width: 430px;

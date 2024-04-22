@@ -11,8 +11,7 @@ import { useStateContext } from "../../context/StateContext";
 import Image from "next/image";
 import getProducts from "../../lib/utils";
 
-const Search = forwardRef((ref) => {
-  Search.displayName = "Search";
+const Search = forwardRef((props, ref) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -20,9 +19,13 @@ const Search = forwardRef((ref) => {
     data.then((products) => setProducts(products));
   }, []);
 
+  Search.displayName = "Search";
+
   const { searchBar, setSearchBar } = useStateContext();
 
   const [matchingProducts, setMatchingProducts] = useState([]);
+
+  const [homeContainerRef, setHomeContainerRef] = useState(null);
 
   //Check is user using mobile device or desktop to define layout
   const [windowWidth, setWindowWidth] = useState("");

@@ -15,6 +15,7 @@ import { FaArrowLeft } from "react-icons/fa6";
 
 import getProducts from "../../../lib/utils";
 import Reviews from "../../../components/Reviews/Reviews";
+import Footer from "../../../components/Footer/Footer";
 
 export async function generateStaticParams() {
   const products = await getProducts();
@@ -31,8 +32,15 @@ export default async function Page({ params }) {
 
   const products = await client.fetch("*[_type == 'product']");
 
-  const { name, stars, ratings, cardSmall, price, details } =
-    product[0];
+  const {
+    name,
+    stars,
+    ratings,
+    cardSmall,
+    price,
+    details,
+    category,
+  } = product[0];
 
   return (
     <>
@@ -41,8 +49,8 @@ export default async function Page({ params }) {
           <Link href="/">
             <FaArrowLeft style={{ fontSize: "2.4rem" }} />
           </Link>
-          {/* <span>{category && category[0]}</span> */}
         </button>
+
         <ProductImages product={product} />
         <div className="product-detail-container__reviews">
           <Reviews
@@ -78,6 +86,7 @@ export default async function Page({ params }) {
             <RelatedProducts products={products} />
           </div>
         </div>
+        <Footer />
       </section>
     </>
   );

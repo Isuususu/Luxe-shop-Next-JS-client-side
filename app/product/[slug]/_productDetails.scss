@@ -1,5 +1,5 @@
 .product-detail-container {
-  padding: 10vh 2vh 2vh 2vh;
+  padding: 150px 2vh 2vh 2vh;
   background: $productDetailBg;
   position: relative;
   &__back-button {
@@ -16,7 +16,7 @@
   }
   &__image {
     width: 100% !important;
-    height: 50vh !important;
+    aspect-ratio: 1/1;
     position: relative !important;
     transition: all 0.3s;
     border-radius: 15px;
@@ -26,7 +26,7 @@
     justify-content: center;
     margin-top: 2vh;
     &__slide {
-      width: 30vw !important;
+      width: 30% !important;
       position: relative !important;
       position: relative;
       border: 2px solid transparent;
@@ -65,11 +65,12 @@
       position: fixed;
       z-index: 98;
       bottom: 0;
-      width: 100vw;
+      width: 100%;
       background: $productDetailAddToCartBg;
       display: flex;
       justify-content: flex-end;
       padding: 2vh 1vh 2vh 1vh;
+
       &__price {
         color: #333;
         font-size: 1.7rem;

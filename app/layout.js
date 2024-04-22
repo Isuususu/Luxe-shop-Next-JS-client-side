@@ -9,6 +9,7 @@ import Navbar from "../components/Navbar/Navbar";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
 import Image from "next/image";
 import Search from "../components/Search/Search";
+import ShoppingCartIcon from "../components/ShoppingCartIcon/ShoppingCartIcon";
 
 // export const metadata = {
 //   title: "Home",
@@ -45,6 +46,7 @@ export default function RootLayout({ children }) {
               <>
                 <Toaster />
                 <Navbar />
+                <ShoppingCartIcon />
                 <Search />
                 {children}
                 <Footer />
@@ -61,6 +63,7 @@ export default function RootLayout({ children }) {
                   <div style={{ transform: "scale(1)" }}>
                     <Toaster />
                     <Navbar mobile={false} />
+                    <ShoppingCartIcon />
                     <Search ref={innerWrapperReference} />
                     <div
                       className={

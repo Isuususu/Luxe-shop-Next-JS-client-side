@@ -1,15 +1,21 @@
 export const cartSlide = {
   visible: {
+    opacity: 1,
     x: "0",
     transition: {
       duration: 0.2,
     },
   },
   hidden: {
-    x: "100vw",
+    opacity: 0,
+    x: "100%",
   },
   exit: {
-    x: "100vw",
+    opacity: 0,
+    x: "100%",
+    transition: {
+      duration: 0.2,
+    },
   },
 };
 
@@ -21,10 +27,13 @@ export const menuSlide = {
     },
   },
   hidden: {
-    x: "100vw",
+    x: "100%",
   },
   exit: {
-    x: "100vw",
+    x: "100%",
+    transition: {
+      duration: 0.2,
+    },
   },
 };
 

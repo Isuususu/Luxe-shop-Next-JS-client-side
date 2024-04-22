@@ -41,7 +41,7 @@ export async function POST(req) {
         quantity: item.quantity,
       };
     }),
-    success_url: `http://localhost:3000/success/success`,
+    success_url: `http://localhost:3000/success`,
     cancel_url: `http://localhost:3000/?canceled=true`,
     automatic_tax: { enabled: true },
   });
