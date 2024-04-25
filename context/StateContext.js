@@ -10,15 +10,17 @@ import toast from "react-hot-toast";
 const Context = createContext();
 
 //Get values from localStorage if they exist
-const cartLocalStorage = JSON.parse(
-  localStorage.getItem("shoppingBag") || "[]"
-);
-const totalQuantitiesLocalStorage = JSON.parse(
-  localStorage.getItem("totalQuantity") || "0"
-);
-const totalPriceLocalStorage = JSON.parse(
-  localStorage.getItem("totalPrice") || "0"
-);
+if (typeof window !== "undefined") {
+  const cartLocalStorage = JSON.parse(
+    localStorage.getItem("shoppingBag") || "[]"
+  );
+  const totalQuantitiesLocalStorage = JSON.parse(
+    localStorage.getItem("totalQuantity") || "0"
+  );
+  const totalPriceLocalStorage = JSON.parse(
+    localStorage.getItem("totalPrice") || "0"
+  );
+}
 
 export const StateContext = ({ children }) => {
   const [showCart, setShowCart] = useState(false);
