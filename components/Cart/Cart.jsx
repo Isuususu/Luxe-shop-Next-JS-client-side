@@ -1,17 +1,16 @@
 "use client";
-import React, { useEffect, useRef } from "react";
-import Link from "next/link";
+import React, { useRef } from "react";
 import toast from "react-hot-toast";
 import { useStateContext } from "../../context/StateContext";
-import { urlFor } from "../../lib/client";
-import { RiDeleteBin6Fill } from "react-icons/ri";
-import { FaMinusSquare, FaPlusSquare } from "react-icons/fa";
+import CartItem from "../CartItem/CartItem";
+import getStripe from "../../lib/getStripe";
+
+//Icons
 import { FaShoppingBag } from "react-icons/fa";
 
-import { motion } from "framer-motion";
+//Animations
+import { AnimatePresence, motion } from "framer-motion";
 import { cartSlide } from "../../styles/animations";
-
-import getStripe from "../../lib/getStripe";
 
 const Cart = ({ mobile }) => {
   const cartRef = useRef();
@@ -21,11 +20,6 @@ const Cart = ({ mobile }) => {
     totalQuantities,
     setShowCart,
     showCart,
-    decreaseQty,
-    increaseQty,
-    qty,
-    updateCartItemQuantity,
-    removeItem,
   } = useStateContext();
 
   const handleCheckout = async () => {
@@ -71,62 +65,17 @@ const Cart = ({ mobile }) => {
         </button>
       </div>
       <div className="cart-container__products_wrapper">
-        {cartItems.length >= 1 ? (
-          cartItems.map((item, index) => (
-            <div className="cart-container__product" key={item?._id}>
-              <img
-                src={urlFor(item.image[0])}
-                className="cart-container__product__image"
-              />
-              <div className="cart-container__product__desc">
-                <h3 className="cart-container__product__desc__name">
-                  {item?.name}
-                </h3>
-                <p className="cart-container__product__desc__price">
-                  £{item?.price}
-                </p>
-                <div className="cart-container__product__desc__qty">
-                  <button
-                    onClick={() =>
-                      updateCartItemQuantity(item._id, "decrement")
-                    }
-                    className="cart-container__product__desc__qty__button"
-                  >
-                    <FaMinusSquare
-                      style={{ fontSize: "1.8rem", color: "#f27012" }}
-                    />
-                  </button>
-                  <p className="cart-container__product__desc__qty__value">
-                    {item?.quantity}
-                  </p>
-                  <button
-                    onClick={() =>
-                      updateCartItemQuantity(item._id, "increment")
-                    }
-                    className="cart-container__product__desc__qty__button"
-                  >
-                    <FaPlusSquare
-                      style={{ fontSize: "1.8rem", color: "#f27012" }}
-                    />
-                  </button>
-                </div>
-              </div>
-              <button
-                type="button"
-                onClick={() => removeItem(item)}
-                className="cart-container__product__delete-btn"
-              >
-                <RiDeleteBin6Fill
-                  style={{ fontSize: "2rem", color: "#333" }}
-                />
-              </button>
+        <AnimatePresence>
+          {cartItems.length > 0 ? (
+            cartItems.map((item, index) => (
+              <CartItem key={item._id} item={item} />
+            ))
+          ) : (
+            <div className="cart-container__empty-basket-msg">
+              <h2>No items yet</h2>
             </div>
-          ))
-        ) : (
-          <div className="cart-container__empty-basket-msg">
-            <h2>No items yet</h2>
-          </div>
-        )}
+          )}
+        </AnimatePresence>
       </div>
       <div className="cart-container__footer">
         <h3 className="cart-container__footer__total-price">

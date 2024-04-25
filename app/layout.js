@@ -49,7 +49,6 @@ export default function RootLayout({ children }) {
                 <ShoppingCartIcon />
                 <Search />
                 {children}
-                <Footer />
               </>
             ) : (
               <div
@@ -60,7 +59,7 @@ export default function RootLayout({ children }) {
                 }}
               >
                 <div className="desktop-layout" id="desktop-layout">
-                  <div style={{ transform: "scale(1)" }}>
+                  <div className="desktop-layout__outer-wrapper">
                     <Toaster />
                     <Navbar mobile={false} />
                     <ShoppingCartIcon />

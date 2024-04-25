@@ -1,0 +1,55 @@
+.cart-container__product {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1vh;
+  background: $cardProductBg;
+  border-radius: 25px;
+  transition: 0.3s all;
+  &__image {
+    position: relative !important;
+    width: 40% !important;
+    aspect-ratio: 1/1 !important;
+    object-fit: contain;
+    background: transparent;
+    border-radius: 15px;
+    margin: 1vh 0 1vh 1vh;
+  }
+  &__desc {
+    padding: 0 1vh 0 1vh;
+    &__name {
+      color: $cardFontColor;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    &__price {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: $cardFontColor;
+    }
+    &__qty {
+      display: flex;
+      align-items: center;
+
+      &__button {
+        border-radius: 0;
+        background: transparent;
+        padding: 0;
+      }
+      &__value {
+        font-weight: bold;
+        font-size: 1.1rem;
+        margin-left: 1vw;
+        margin-right: 1vw;
+        color: $cardFontColor;
+      }
+    }
+  }
+
+  &__delete-btn {
+    align-self: center;
+    justify-items: flex-end;
+    margin-left: auto;
+    background: transparent;
+    border-radius: 0;
+  }
+}

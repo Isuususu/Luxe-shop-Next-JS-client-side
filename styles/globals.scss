@@ -3,6 +3,7 @@
 @import "./animations";
 @import "../components/HeroBanner/herobanner";
 @import "../components/Cart/cart";
+@import "../components/CartItem/cartItem";
 @import "../components/Footer/footer";
 @import "../components/FooterBanner/footerbanner";
 @import "../components/Navbar/navbar";
@@ -123,6 +124,11 @@ input {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   z-index: 99;
+  border-radius: 50px;
+  &__outer-wrapper {
+    transform: scale(1);
+    overflow: hidden;
+  }
   &__inner-wrapper {
     overflow: auto;
     // height: 710px;
@@ -205,6 +211,9 @@ input {
     height: 730px;
     width: 400px;
     padding: 10px 16px 10px 15px;
+    &__outer-wrapper {
+      border-radius: 43px;
+    }
     &__inner-wrapper {
       height: 710px;
       border-radius: 43px;
@@ -243,6 +252,9 @@ input {
     height: 830px;
     width: 430px;
     padding: 10px 16px 10px 15px;
+    &__outer-wrapper {
+      border-radius: 53px;
+    }
     &__inner-wrapper {
       height: 810px;
       border-radius: 53px;

@@ -1,7 +1,7 @@
 "use client";
 import React, { Suspense, useEffect, useState } from "react";
 
-import getProducts, { isMobileDevice } from "../lib/utils";
+import getProducts from "../lib/utils";
 
 // import function to register Swiper custom elements
 import { register } from "swiper/element/bundle";
@@ -53,13 +53,15 @@ export default function Index() {
     const elements = products.map((product) => {
       return (
         product.category.find((cat) => cat === category) && (
-          <SwiperSlide>
-            <Product
-              product={product}
-              key={product._id}
-              cardSmall={true}
-            />
-          </SwiperSlide>
+          <AnimatePresence>
+            <SwiperSlide>
+              <Product
+                product={product}
+                key={product._id}
+                cardSmall={true}
+              />
+            </SwiperSlide>
+          </AnimatePresence>
         )
       );
     });

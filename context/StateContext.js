@@ -9,12 +9,27 @@ import toast from "react-hot-toast";
 
 const Context = createContext();
 
+//Get values from localStorage if they exist
+const cartLocalStorage = JSON.parse(
+  localStorage.getItem("shoppingBag") || "[]"
+);
+const totalQuantitiesLocalStorage = JSON.parse(
+  localStorage.getItem("totalQuantity") || "0"
+);
+const totalPriceLocalStorage = JSON.parse(
+  localStorage.getItem("totalPrice") || "0"
+);
+
 export const StateContext = ({ children }) => {
   const [showCart, setShowCart] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
-  const [totalPrice, setTotalPrice] = useState(0);
-  const [totalQuantities, setTotalQuantities] = useState(0);
+  const [cartItems, setCartItems] = useState(cartLocalStorage);
+  const [totalPrice, setTotalPrice] = useState(
+    totalPriceLocalStorage
+  );
+  const [totalQuantities, setTotalQuantities] = useState(
+    totalQuantitiesLocalStorage
+  );
   const [qty, setQty] = useState(1);
 
   const [searchBar, setSearchBar] = useState(false);
@@ -61,48 +76,14 @@ export const StateContext = ({ children }) => {
     setQty(1);
   };
 
+  //Handling local storage
   useEffect(() => {
-    if (cartItems.length > 0) {
-      localStorage.setItem(
-        "shoppingBag",
-        JSON.stringify(...[cartItems])
-      );
-      localStorage.setItem(
-        "totalQuantity",
-        JSON.stringify(totalQuantities)
-      );
-      localStorage.setItem("totalPrice", JSON.stringify(totalPrice));
-    }
-  }, [cartItems]);
-
-  console.log(cartItems);
-
-  const [clientSideData, setClientSideData] = useState([]);
-  const [clientSideQuantity, setClientSideQuantity] = useState();
-  const [clientSidePrice, setClientsidePrice] = useState();
-
-  useEffect(() => {
-    // Use local storage or any other client-side mechanism here
-    const storedValue = localStorage.getItem("shoppingBag");
-    const storedTotalQuantities =
-      localStorage.getItem("totalQuantity");
-    const storedTotalPrice = localStorage.getItem("totalPrice");
-    //Getting a value of local storage
-
-    if (storedValue && cartItems.length < 1) {
-      setCartItems(clientSideData);
-      setTotalPrice(clientSidePrice);
-      setTotalQuantities(clientSideQuantity);
-
-      //If there is value in local storage and not in cartItems run this
-    }
-    if (storedValue) {
-      //This should run only when there is a value on client side
-
-      setClientSideData(JSON.parse(storedValue));
-      setClientSideQuantity(JSON.parse(storedTotalQuantities));
-      setClientsidePrice(JSON.parse(storedTotalPrice));
-    }
+    localStorage.setItem("shoppingBag", JSON.stringify(cartItems));
+    localStorage.setItem(
+      "totalQuantity",
+      JSON.stringify(totalQuantities)
+    );
+    localStorage.setItem("totalPrice", JSON.stringify(totalPrice));
   }, [cartItems]);
 
   //
@@ -124,6 +105,7 @@ export const StateContext = ({ children }) => {
         prev - matchingProduct.price * matchingProduct.quantity
     );
     setTotalQuantities((prev) => prev - matchingProduct.quantity);
+    // localStorage.removeItem("shoppingBag", matchingProduct);
     setCartItems(newCardItems);
   };
 

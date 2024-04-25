@@ -1,21 +1,18 @@
 export const cartSlide = {
   visible: {
-    opacity: 1,
     x: "0",
     transition: {
       duration: 0.2,
     },
   },
   hidden: {
-    opacity: 0,
-    x: "100%",
-  },
-  exit: {
-    opacity: 0,
     x: "100%",
     transition: {
       duration: 0.2,
     },
+  },
+  exit: {
+    x: "100%",
   },
 };
 
@@ -28,12 +25,39 @@ export const menuSlide = {
   },
   hidden: {
     x: "100%",
-  },
-  exit: {
-    x: "100%",
     transition: {
       duration: 0.2,
     },
+  },
+  exit: {
+    x: "100%",
+  },
+};
+
+export const cartProductAnimation = {
+  visible: {
+    scale: 1,
+    transition: {
+      duration: 0.2,
+    },
+  },
+  exit: {
+    scale: 0,
+    transition: {
+      duration: 0.2,
+    },
+  },
+};
+
+export const productAnimation = {
+  visible: {
+    scale: 1,
+  },
+  hidden: {
+    scale: 0.5,
+  },
+  exit: {
+    scale: 0.5,
   },
 };
 

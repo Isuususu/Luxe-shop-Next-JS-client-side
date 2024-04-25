@@ -1,15 +1,17 @@
 import React from "react";
 import { urlFor } from "../../lib/client";
 import Link from "next/link";
-import { AnimatePresence, motion } from "framer-motion";
-
-//Icons
-
-import { FaRegHeart } from "react-icons/fa";
-import { FaCartPlus } from "react-icons/fa";
 import Reviews from "../Reviews/Reviews";
 import { useStateContext } from "../../context/StateContext";
 import Image from "next/image";
+
+//Icons
+import { FaRegHeart } from "react-icons/fa";
+import { FaCartPlus } from "react-icons/fa";
+
+//Animations
+import { motion } from "framer-motion";
+import { productAnimation } from "../../styles/animations";
 
 const Product = ({ product, cardSmall }) => {
   const { addToCart, qty } = useStateContext();
@@ -24,9 +26,10 @@ const Product = ({ product, cardSmall }) => {
       className={`product-card ${
         cardSmall === true ? "small-card" : ""
       }`}
-      initial={{ opacity: 0, scale: 0.5 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.5 }}
+      variants={productAnimation}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
     >
       <Link href={`/product/${product.slug.current}`}>
         <Image
