@@ -67,7 +67,7 @@ const Cart = ({ mobile }) => {
       <div className="cart-container__products_wrapper">
         <AnimatePresence>
           {cartItems.length > 0 ? (
-            cartItems.map((item, index) => (
+            cartItems?.map((item, index) => (
               <CartItem key={item._id} item={item} />
             ))
           ) : (

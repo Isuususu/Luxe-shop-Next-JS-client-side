@@ -10,31 +10,64 @@ import toast from "react-hot-toast";
 const Context = createContext();
 
 //Get values from localStorage if they exist
-if (typeof window !== "undefined") {
-  const cartLocalStorage = JSON.parse(
-    localStorage.getItem("shoppingBag") || "[]"
-  );
-  const totalQuantitiesLocalStorage = JSON.parse(
-    localStorage.getItem("totalQuantity") || "0"
-  );
-  const totalPriceLocalStorage = JSON.parse(
-    localStorage.getItem("totalPrice") || "0"
-  );
-}
+
+// const cartLocalStorage = JSON.parse(
+//   localStorage.getItem("shoppingBag") || "[]"
+// );
+// const totalQuantitiesLocalStorage = JSON.parse(
+//   localStorage.getItem("totalQuantity") || "0"
+// );
+// const totalPriceLocalStorage = JSON.parse(
+//   localStorage.getItem("totalPrice") || "0"
+// );
 
 export const StateContext = ({ children }) => {
   const [showCart, setShowCart] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
-  const [cartItems, setCartItems] = useState(cartLocalStorage);
-  const [totalPrice, setTotalPrice] = useState(
-    totalPriceLocalStorage
-  );
-  const [totalQuantities, setTotalQuantities] = useState(
-    totalQuantitiesLocalStorage
-  );
+  const [cartItems, setCartItems] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalQuantities, setTotalQuantities] = useState(0);
   const [qty, setQty] = useState(1);
-
   const [searchBar, setSearchBar] = useState(false);
+
+  //Handling localStorage logic
+  useEffect(() => {
+    const shoppingCartInLocalStorage =
+      localStorage.getItem("shoppingBag");
+    const totalQuantityInLocalStorage =
+      localStorage.getItem("totalQty");
+    const totalPriceInLocalStorage =
+      localStorage.getItem("totalPrice");
+    if (shoppingCartInLocalStorage) {
+      console.log("Fetching items from local storage");
+      setCartItems(JSON.parse(shoppingCartInLocalStorage));
+      setTotalQuantities(JSON.parse(totalQuantityInLocalStorage));
+      setTotalPrice(JSON.parse(totalPriceInLocalStorage));
+    }
+  }, []);
+
+  useEffect(() => {
+    //This code will only run when add product to cart
+    if (cartItems.length > 0) {
+      const shoppingCartInLocalStorage =
+        localStorage.getItem("shoppingBag");
+      if (shoppingCartInLocalStorage) {
+        localStorage.setItem(
+          "shoppingBag",
+          JSON.stringify(...[cartItems])
+        );
+        localStorage.setItem("totalQty", totalQuantities);
+        localStorage.setItem("totalPrice", totalPrice);
+      } else {
+        localStorage.setItem(
+          "shoppingBag",
+          JSON.stringify(cartItems)
+        );
+        localStorage.setItem("totalQty", totalQuantities);
+        localStorage.setItem("totalPrice", totalPrice);
+      }
+    }
+  }, [cartItems]);
 
   let matchingProduct;
   let matchingProductIndex;
@@ -78,16 +111,6 @@ export const StateContext = ({ children }) => {
     setQty(1);
   };
 
-  //Handling local storage
-  useEffect(() => {
-    localStorage.setItem("shoppingBag", JSON.stringify(cartItems));
-    localStorage.setItem(
-      "totalQuantity",
-      JSON.stringify(totalQuantities)
-    );
-    localStorage.setItem("totalPrice", JSON.stringify(totalPrice));
-  }, [cartItems]);
-
   //
   // Removing cart item
   //
@@ -109,6 +132,7 @@ export const StateContext = ({ children }) => {
     setTotalQuantities((prev) => prev - matchingProduct.quantity);
     // localStorage.removeItem("shoppingBag", matchingProduct);
     setCartItems(newCardItems);
+    localStorage.removeItem("shoppingBag", matchingProduct);
   };
 
   //

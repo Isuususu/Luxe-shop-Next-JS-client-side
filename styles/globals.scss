@@ -112,6 +112,15 @@ input {
   overflow: scroll;
 }
 
+.not-found-page {
+  background: $homeBg;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
 .desktop-layout {
   position: relative;
   // width: 430px;
