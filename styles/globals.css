@@ -186,7 +186,7 @@
 }
 
 .navbar-top {
-  min-height: 6vh;
+  min-height: 3.5rem;
   background: transparent;
   width: 100%;
   position: fixed;
@@ -604,7 +604,7 @@
 .search-form__label__input-field {
   position: relative;
   z-index: 3;
-  padding: 10px 0 10px 30px;
+  padding: 13px 0 13px 30px;
   border-radius: 14px;
   border: 0;
   color: #333;
@@ -852,15 +852,6 @@
   gap: 0.5rem;
 }
 
-.wishlist-container {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  width: 100%;
-  background: #fff;
-}
-
 .overflow-auto {
   overflow: scroll;
 }
@@ -1026,6 +1017,14 @@
   margin-left: 0.25rem;
   font-weight: 600;
   font-size: 1.3rem;
+}
+
+.wishlist-container__item {
+  width: 25%;
+  background: #fff;
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+  border-radius: 20px;
 }
 
 * {

@@ -20,6 +20,8 @@ import Image from "next/image";
 //Icons
 import { TiThMenu } from "react-icons/ti";
 import { IoNotifications } from "react-icons/io5";
+import { FaUser } from "react-icons/fa";
+
 import { HiMiniHome } from "react-icons/hi2";
 
 const Navbar = forwardRef(({ mobile, user }, ref) => {
@@ -80,9 +82,9 @@ const Navbar = forwardRef(({ mobile, user }, ref) => {
             mobile === false ? "desktop__navbar-bottom" : ""
           }`}
         >
-          <Link href="/user/user">
+          <Link href="/user">
             <button className="navbar-bottom__cart-icon">
-              <IoNotifications
+              <FaUser
                 style={{ fontSize: "1.7rem", color: "#474747" }}
               />
             </button>
