@@ -42,6 +42,8 @@ export default async function Page({ params }) {
     category,
   } = product[0];
 
+  console.log("Product details SSR test");
+
   return (
     <>
       <section className="product-detail-container">

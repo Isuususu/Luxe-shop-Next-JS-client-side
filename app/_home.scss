@@ -5,7 +5,7 @@
   // margin-top: 100vh;
   min-height: 100vh;
   width: 100%;
-  padding: 10vh 2vh 2vh 2vh;
+  padding: 150px 2vh 2vh 2vh;
   &__headline {
     color: $homeHeadlineTextColor;
     position: relative;
@@ -25,6 +25,8 @@
   }
   &__products {
     width: 100%;
+    transition: all 0.2s;
+    max-height: 100vh;
     &:last-of-type {
       & .swiper-wrapper {
         // gap: 10px;
@@ -36,22 +38,4 @@
       }
     }
   }
-  &__category-selector {
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 1vh;
-    margin-top: 3vh;
-
-    &__button {
-      background: #fff;
-      transition: all 0.5s;
-      flex-shrink: 1;
-    }
-  }
-}
-
-.selected-cat {
-  background: $homeCatBtnActive;
-  color: #fff;
 }

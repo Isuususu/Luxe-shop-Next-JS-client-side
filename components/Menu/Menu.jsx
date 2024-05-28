@@ -12,12 +12,9 @@ import { cartSlide, menuSlide } from "../../styles/animations";
 import { useStateContext } from "../../context/StateContext";
 import Link from "next/link";
 
-import { useUser } from "@auth0/nextjs-auth0/client";
 import Image from "next/image";
 
 const Menu = () => {
-  const user = useUser();
-
   //Check is user using mobile device or desktop to define layout
   const [windowWidth, setWindowWidth] = useState("");
   useEffect(() => {
@@ -59,28 +56,32 @@ const Menu = () => {
             mobile === false ? "desktop-menu-container__avatar" : ""
           }`}
         >
-          <Image
+          {/* <Image
             className="menu-container__avatar__bg__profile-image"
             alt=""
             src={user.user.picture}
             fill
-          />
+          /> */}
 
           <h3 className="menu-container__avatar__bg__login-data">
-            Welcome back, {user.user.nickname}
+            Welcome back,
           </h3>
         </div>
       </div>
 
       <ul className="menu-container__nav">
-        <li className="menu-container__nav__item">
-          <FaHome />
-          Home
-        </li>
-        <li className="menu-container__nav__item">
-          <BiSolidCategory />
-          Products
-        </li>
+        <Link href="/">
+          <li className="menu-container__nav__item">
+            <FaHome />
+            Home
+          </li>
+        </Link>
+        <Link href="/products">
+          <li className="menu-container__nav__item">
+            <BiSolidCategory />
+            Products
+          </li>
+        </Link>
         <Link href="/user">
           <li className="menu-container__nav__item">
             <IoPerson />

@@ -4,14 +4,19 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint"
   },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.js"
+  },
   "dependencies": {
+    "@auth/prisma-adapter": "^2.0.0",
     "@auth0/nextjs-auth0": "^3.5.0",
     "@babel/core": "^7.23.7",
     "@clerk/nextjs": "^4.29.5",
+    "@prisma/client": "^5.13.0",
     "@sanity/block-content-to-react": "^3.0.0",
     "@sanity/client": "^6.11.1",
     "@sanity/image-url": "^1.0.2",
@@ -19,17 +24,23 @@
     "@stripe/stripe-js": "^2.3.0",
     "@supabase/ssr": "^0.1.0",
     "@supabase/supabase-js": "^2.39.8",
+    "@types/bcrypt": "^5.0.2",
     "@types/ua-parser-js": "^0.7.39",
+    "bcrypt": "^5.1.1",
     "canvas-confetti": "^1.9.2",
+    "firebase": "^10.11.1",
+    "firebase-admin": "^12.1.0",
     "framer-motion": "^10.18.0",
     "next": "^14.2.2",
-    "next-auth": "^4.24.6",
+    "next-auth": "^4.24.7",
     "next-auth-sanity": "^1.5.3",
+    "next-firebase-auth-edge": "^1.4.1",
     "next-sanity": "^7.0.10",
     "next-sanity-image": "^6.1.1",
     "nextjs-cors": "^2.2.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-firebase-hooks": "^5.1.1",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^5.0.1",
     "sanity": "^3.24.1",
@@ -39,7 +50,8 @@
     "supertokens-node": "^16.7.1",
     "supertokens-web-js": "^0.9.0",
     "swiper": "^11.0.5",
-    "ua-parser-js": "^1.0.37"
+    "ua-parser-js": "^1.0.37",
+    "typescript": "^5.4.5"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.23.3",
@@ -47,7 +59,9 @@
     "@types/react": "^18.2.79",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
+    "prisma": "^5.13.0",
     "sass": "^1.70.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
   }
 }

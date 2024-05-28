@@ -1,43 +1,79 @@
 "use client";
-import React from "react";
+import React, { forwardRef } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useStateContext } from "../../context/StateContext";
+
+//Animations
+import {
+  AnimatePresence,
+  useMotionValueEvent,
+  useScroll,
+} from "framer-motion";
+
+//Components
+import Menu from "../Menu/Menu";
+import Search from "../Search/Search";
+import UserModal from "../UserModal/UserModal";
+import Image from "next/image";
 
 //Icons
-import { FaShoppingBag } from "react-icons/fa";
 import { TiThMenu } from "react-icons/ti";
-
 import { IoNotifications } from "react-icons/io5";
 import { HiMiniHome } from "react-icons/hi2";
 
-import Cart from "../Cart/Cart";
-import { useStateContext } from "../../context/StateContext";
-import { AnimatePresence, useMotionValueEvent } from "framer-motion";
-import { useScroll } from "framer-motion";
-import Menu from "../Menu/Menu";
-
-import { motion } from "framer-motion";
-import { client } from "../../lib/client";
-import Search from "../Search/Search";
-import { usePathname, useRouter } from "next/navigation";
-// import { UserButton } from "@clerk/nextjs";
-
-const Navbar = ({ mobile }) => {
+const Navbar = forwardRef(({ mobile, user }, ref) => {
+  Navbar.displayName = "Navbar";
   const {
-    showCart,
-    setShowCart,
-    totalQuantities,
     showMenu,
     setShowMenu,
-    user,
     searchBar,
+    userModal,
+    setUserModal,
   } = useStateContext();
 
+  //Keep navbar bottom hidden on product page
   const pathname = usePathname();
+  const showNavbarBottom = pathname === "/product";
 
-  const showNavbarBottom = pathname.startsWith("/product");
+  //Handling navbar top animation
+  const { scrollY } = useScroll(
+    mobile === false && { container: ref }
+  );
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const navbarTop = document.getElementById("navbar-top");
+    if (searchBar) {
+      return;
+    }
+    if (latest >= 100) {
+      navbarTop.classList.add("navbar-transition");
+    } else {
+      navbarTop.classList.remove("navbar-transition");
+    }
+  });
 
   return (
     <>
+      <div
+        id="navbar-top"
+        className={`navbar-top ${
+          mobile === false ? "desktop__navbar-top" : ""
+        } ${searchBar ? "navbar-full-width" : ""}`}
+      >
+        <Search mobile={mobile} />
+
+        <Image
+          className="user-img"
+          src="/images/user-avatar.png"
+          alt=""
+          width={40}
+          height={40}
+          onClick={() => setUserModal(!userModal)}
+        />
+        <AnimatePresence mode="wait">
+          {userModal && <UserModal user={user} />}
+        </AnimatePresence>
+      </div>
       {!showNavbarBottom ? (
         <div
           className={`navbar-bottom ${
@@ -73,6 +109,6 @@ const Navbar = ({ mobile }) => {
       ) : null}
     </>
   );
-};
+});
 
 export default Navbar;

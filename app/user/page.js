@@ -1,22 +1,23 @@
 "use client";
 
-import { useUser } from "@auth0/nextjs-auth0/client";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
 
 export default function ProfileClient() {
-  const { user, error, isLoading } = useUser();
+  const session = useSession();
 
-  console.log(user);
+  console.log(session);
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>{error.message}</div>;
-
-  return user ? (
-    <div>
-      <img src={user.picture} alt={user.name} />
-      <h2>{user.name}</h2>
-      <p>{user.email}</p>
+  return (
+    <div className="user-page">
+      {/* <Image
+         fill
+         src={user.picture}
+         alt={user.name}
+        className="user-page__image"
+       /> */}
+      <h3>Email: {session.data.user.email}</h3>
+      <h3>Recent searches</h3>
     </div>
-  ) : (
-    <h1>No user logged in</h1>
   );
 }

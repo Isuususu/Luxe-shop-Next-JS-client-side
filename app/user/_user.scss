@@ -1,0 +1,11 @@
+.user-page {
+  min-height: 100%;
+  background: $homeBg;
+  padding: 130px 2vh 2vh 2vh;
+  &__image {
+    width: 30% !important;
+    height: 30% !important;
+    position: relative !important;
+    border-radius: 180px;
+  }
+}

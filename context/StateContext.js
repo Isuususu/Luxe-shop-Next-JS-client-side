@@ -1,4 +1,8 @@
 "use client";
+import {
+  getLocalStorageItem,
+  setLocalStorageItem,
+} from "@/lib/utils";
 import React, {
   createContext,
   useContext,
@@ -9,18 +13,6 @@ import toast from "react-hot-toast";
 
 const Context = createContext();
 
-//Get values from localStorage if they exist
-
-// const cartLocalStorage = JSON.parse(
-//   localStorage.getItem("shoppingBag") || "[]"
-// );
-// const totalQuantitiesLocalStorage = JSON.parse(
-//   localStorage.getItem("totalQuantity") || "0"
-// );
-// const totalPriceLocalStorage = JSON.parse(
-//   localStorage.getItem("totalPrice") || "0"
-// );
-
 export const StateContext = ({ children }) => {
   const [showCart, setShowCart] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
@@ -29,48 +21,102 @@ export const StateContext = ({ children }) => {
   const [totalQuantities, setTotalQuantities] = useState(0);
   const [qty, setQty] = useState(1);
   const [searchBar, setSearchBar] = useState(false);
+  const [category, setCategory] = useState("All");
+  const [wishlist, setWishlist] = useState([]);
+  const [userModal, setUserModal] = useState(false);
 
   //Handling localStorage logic
   useEffect(() => {
-    const shoppingCartInLocalStorage =
-      localStorage.getItem("shoppingBag");
-    const totalQuantityInLocalStorage =
-      localStorage.getItem("totalQty");
-    const totalPriceInLocalStorage =
-      localStorage.getItem("totalPrice");
-    if (shoppingCartInLocalStorage) {
-      console.log("Fetching items from local storage");
-      setCartItems(JSON.parse(shoppingCartInLocalStorage));
-      setTotalQuantities(JSON.parse(totalQuantityInLocalStorage));
-      setTotalPrice(JSON.parse(totalPriceInLocalStorage));
+    const initialCartItems = getLocalStorageItem("shoppingBag", []);
+    const initialTotalQuantities = getLocalStorageItem("totalQty", 0);
+    const initialTotalPrice = getLocalStorageItem("totalPrice", 0);
+    const initialWishlist = getLocalStorageItem("wishlist", []);
+
+    if (initialCartItems.length !== 0) {
+      setCartItems(initialCartItems);
+      setTotalQuantities(initialTotalQuantities);
+      setTotalPrice(initialTotalPrice);
+    }
+    if (initialWishlist.length !== 0) {
+      setWishlist(initialWishlist);
     }
   }, []);
 
   useEffect(() => {
-    //This code will only run when add product to cart
-    if (cartItems.length > 0) {
-      const shoppingCartInLocalStorage =
-        localStorage.getItem("shoppingBag");
-      if (shoppingCartInLocalStorage) {
-        localStorage.setItem(
-          "shoppingBag",
-          JSON.stringify(...[cartItems])
-        );
-        localStorage.setItem("totalQty", totalQuantities);
-        localStorage.setItem("totalPrice", totalPrice);
-      } else {
-        localStorage.setItem(
-          "shoppingBag",
-          JSON.stringify(cartItems)
-        );
-        localStorage.setItem("totalQty", totalQuantities);
-        localStorage.setItem("totalPrice", totalPrice);
-      }
+    if (cartItems.length !== 0) {
+      setLocalStorageItem("shoppingBag", cartItems);
+      setLocalStorageItem("totalQty", totalQuantities);
+      setLocalStorageItem("totalPrice", totalPrice);
     }
   }, [cartItems]);
 
-  let matchingProduct;
-  let matchingProductIndex;
+  useEffect(() => {
+    if (wishlist.length !== 0) {
+      setLocalStorageItem("wishlist", wishlist);
+    }
+  }, [wishlist]);
+
+  // useEffect(() => {
+  //   setLocalStorageItem("wishlist", wishlist);
+  // }, [wishlist]);
+
+  // useEffect(() => {
+  //   const shoppingCartInLocalStorage =
+  //     localStorage.getItem("shoppingBag");
+  //   const totalQuantityInLocalStorage =
+  //     localStorage.getItem("totalQty");
+  //   const totalPriceInLocalStorage =
+  //     localStorage.getItem("totalPrice");
+  //   const wishlistInLocalStorage = localStorage.getItem("wishlist");
+  //   if (shoppingCartInLocalStorage) {
+  //     console.log("Fetching items from local storage");
+  //     setCartItems(JSON.parse(shoppingCartInLocalStorage));
+  //     setTotalQuantities(JSON.parse(totalQuantityInLocalStorage));
+  //     setTotalPrice(JSON.parse(totalPriceInLocalStorage));
+  //   }
+  //   if (wishlistInLocalStorage) {
+  //     console.log("Fetching wishlist from local storage");
+  //     setWishlist(JSON.parse(wishlistInLocalStorage));
+  //   }
+  // }, []);
+
+  // useEffect(() => {
+  //   //This code will only run when add product to cart
+  //   if (cartItems.length > 0) {
+  //     const shoppingCartInLocalStorage =
+  //       localStorage.getItem("shoppingBag");
+  //     if (shoppingCartInLocalStorage) {
+  //       localStorage.setItem(
+  //         "shoppingBag",
+  //         JSON.stringify(...[cartItems])
+  //       );
+  //       localStorage.setItem("totalQty", totalQuantities);
+  //       localStorage.setItem("totalPrice", totalPrice);
+  //     } else {
+  //       localStorage.setItem(
+  //         "shoppingBag",
+  //         JSON.stringify(cartItems)
+  //       );
+  //       localStorage.setItem("totalQty", totalQuantities);
+  //       localStorage.setItem("totalPrice", totalPrice);
+  //     }
+  //   }
+  // }, [cartItems]);
+
+  // useEffect(() => {
+  //   if (wishlist.length > 0) {
+  //     const wishlistInLocalStorage = localStorage.getItem("wishlist");
+  //     if (wishlistInLocalStorage) {
+  //       localStorage.setItem(
+  //         "wishlist",
+  //         JSON.stringify([...wishlist])
+  //       );
+  //     } else {
+  //       localStorage.setItem("wishlist", JSON.stringify(wishlist));
+  //     }
+  //   }
+  // }, [wishlist]);
+  // Update localStorage when wishlist changes
 
   //
   //Adding item to cart
@@ -106,16 +152,34 @@ export const StateContext = ({ children }) => {
     toast.success(`${qty} x ${product.name} added to cart`, {
       position: "top-center",
       duration: 2000,
-      style: { marginTop: "10vh" },
+      style: { marginTop: "4rem" },
     });
     setQty(1);
   };
+
+  const addToWishlist = (product) => {
+    const checkProductInWishlist = wishlist.find(
+      (item) => product._id === item._id
+    );
+    if (checkProductInWishlist) {
+      console.log("Product alreadt on wishlist");
+    } else {
+      setWishlist([...wishlist, { ...product }]);
+      toast.success(`${product.name} added to wishlist`, {
+        position: "top-center",
+        style: { marginTop: "4rem" },
+      });
+    }
+  };
+
+  console.log("Wishlist: ", wishlist);
+  console.log("Cart items: ", cartItems);
 
   //
   // Removing cart item
   //
   const removeItem = (product) => {
-    matchingProduct = cartItems.find(
+    let matchingProduct = cartItems.find(
       (item) => item._id === product._id
     );
 
@@ -206,6 +270,12 @@ export const StateContext = ({ children }) => {
         removeItem,
         searchBar,
         setSearchBar,
+        category,
+        setCategory,
+        userModal,
+        setUserModal,
+        addToWishlist,
+        wishlist,
       }}
     >
       {children}

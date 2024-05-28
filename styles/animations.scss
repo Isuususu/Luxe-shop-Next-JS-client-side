@@ -6,20 +6,17 @@
   top: 0;
   left: 0;
   right: 0;
-  background: #333;
+  background: #646464ab;
+  backdrop-filter: blur(30px);
 }
 
-.searchbar-transition {
-  width: 30px !important;
-  border-radius: 15px 0 0 15px;
+.navbar-transition {
+  width: 100px !important;
+  border-radius: 25px 0 0 25px;
   background: #fff !important;
   box-shadow: 9px 9px 43px 1px rgba(110, 38, 243, 0.267);
 }
 
-.searchform-transition {
-  width: 100% !important;
-}
-
-.search-full-width {
+.navbar-full-width {
   width: 100%;
 }

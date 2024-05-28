@@ -1,97 +1,59 @@
-"use client";
-import React, { useEffect, useRef, useState } from "react";
-import { StateContext } from "../context/StateContext";
+import React from "react";
 import "../styles/globals.css";
-import { Toaster } from "react-hot-toast";
-import Footer from "../components/Footer/Footer";
+
+//Context
+import { StateContext } from "../context/StateContext";
+
+//Components
 import Navbar from "../components/Navbar/Navbar";
-
-import { UserProvider } from "@auth0/nextjs-auth0/client";
-import Image from "next/image";
-import Search from "../components/Search/Search";
 import ShoppingCartIcon from "../components/ShoppingCartIcon/ShoppingCartIcon";
+import DesktopLayout from "../components/DesktopLayout/DesktopLayout";
+import { Toaster } from "react-hot-toast";
 
-// export const metadata = {
-//   title: "Home",
-//   description: "Welcome to Next.js",
-// };
+//Lib
+import { Providers } from "./providers";
+import { headers } from "next/headers";
+import { getServerSession } from "next-auth";
+import { options } from "./api/auth/[...nextauth]/options";
+import { isMobileDevice } from "@/lib/utils";
 
-export default function RootLayout({ children }) {
-  //Check is user using mobile device or desktop to define layout
-  const [windowWidth, setWindowWidth] = useState("");
-  useEffect(() => {
-    if (typeof window != "undefined") {
-      const windowWidth = window.innerWidth;
-      setWindowWidth(windowWidth);
-    }
-  }, [windowWidth]);
-  const mobile = windowWidth < 500;
+export const metadata = {
+  title: "Luxe Shop",
+  description: "Welcome to Luxe Shop",
+};
 
-  //This is a reference to inner wrapper to keep searchbar animation logic
-  const [innerWrapperReference, setInnerWrapperReference] =
-    useState(null);
-  const innerWrapperRef = useRef(null);
-  useEffect(() => {
-    if (innerWrapperRef !== null) {
-      setInnerWrapperReference(innerWrapperRef);
-    }
-  }, []);
+export default async function RootLayout({ children }) {
+  const mobile = isMobileDevice(headers());
+
+  console.log("Is it mobile device", mobile);
+
+  const session = await getServerSession(options);
+  console.log(session);
 
   return (
     <html lang="en">
-      <UserProvider>
-        <body suppressHydrationWarning={true}>
-          <StateContext>
-            {mobile ? (
+      <body suppressHydrationWarning={true}>
+        {/* <Providers> */}
+        <StateContext>
+          {mobile === true ? (
+            session === null ? (
+              children
+            ) : (
               <>
                 <Toaster />
-                <Navbar />
+                <Navbar user={session.user} />
                 <ShoppingCartIcon />
-                <Search />
                 {children}
               </>
-            ) : (
-              <div
-                style={{
-                  height: "100vh",
-                  display: "flex",
-                  background: "#ffcd45",
-                }}
-              >
-                <div className="desktop-layout" id="desktop-layout">
-                  <div className="desktop-layout__outer-wrapper">
-                    <Toaster />
-                    <Navbar mobile={false} />
-                    <ShoppingCartIcon />
-                    <Search ref={innerWrapperReference} />
-                    <div
-                      className={
-                        !mobile ? "desktop-layout__inner-wrapper" : ""
-                      }
-                      ref={innerWrapperRef}
-                    >
-                      <Image
-                        src="/images/notch.png"
-                        alt=""
-                        width={113}
-                        height={30}
-                        style={{
-                          zIndex: "99",
-                          position: "absolute",
-                          left: "50%",
-                          top: "20px",
-                          transform: "translate(-50%)",
-                        }}
-                      />
-                      {children}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-          </StateContext>
-        </body>
-      </UserProvider>
+            )
+          ) : (
+            <DesktopLayout user={session ? session.user : null}>
+              {children}
+            </DesktopLayout>
+          )}
+        </StateContext>
+        {/* </Providers> */}
+      </body>
     </html>
   );
 }

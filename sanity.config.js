@@ -12,4 +12,9 @@ export default defineConfig({
   schema: {
     types: schemaTypes,
   },
+  // studio: {
+  //   components: {
+  //     layout: Studio,
+  //   },
+  // },
 });

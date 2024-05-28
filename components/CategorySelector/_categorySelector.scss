@@ -1,0 +1,18 @@
+.category-selector {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 1vh;
+  margin: 3vh auto 3vh auto;
+
+  &__button {
+    background: #fff;
+    transition: all 0.5s;
+    flex-shrink: 1;
+  }
+}
+
+.selected-cat {
+  background: $homeCatBtnActive;
+  color: #fff;
+}

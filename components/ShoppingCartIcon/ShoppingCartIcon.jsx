@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import { FaShoppingBag } from "react-icons/fa";
 import { useStateContext } from "../../context/StateContext";
