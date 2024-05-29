@@ -33,10 +33,11 @@ body {
 
 a {
   text-decoration: none;
+  color: #333;
 }
 
 p {
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: #333;
 }
 
@@ -45,7 +46,7 @@ h1 {
 }
 
 h2 {
-  color: #333;
+  color: #262c36;
 }
 
 h3 {
@@ -65,6 +66,14 @@ button {
 input {
   font-family: "Open Sans", sans-serif;
 }
+
+//Layout classes
+.flex-center {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .swiper {
   position: relative;
 }
@@ -77,9 +86,7 @@ input {
 }
 
 .sanity-container {
-  padding: 20px;
-  margin-top: 100px;
-  margin-bottom: 50px;
+  height: 100%;
 }
 
 .loading-page {

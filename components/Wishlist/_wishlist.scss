@@ -1,8 +1,22 @@
 .wishlist-container {
+  height: 500px;
+  overflow: auto;
+  //hide scrollbar
+  &::-webkit-scrollbar {
+    display: none;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
   &__item {
     background: #fff;
     padding: 0.5rem;
     margin-top: 0.25rem;
     border-radius: 20px;
+    display: flex;
+    &__details {
+      &__name {
+        font-weight: 600;
+      }
+    }
   }
 }

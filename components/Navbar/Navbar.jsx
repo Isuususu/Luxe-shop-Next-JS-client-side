@@ -1,5 +1,5 @@
 "use client";
-import React, { forwardRef } from "react";
+import React, { forwardRef, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useStateContext } from "../../context/StateContext";
@@ -37,6 +37,17 @@ const Navbar = forwardRef(({ mobile, user }, ref) => {
   //Keep navbar bottom hidden on product page
   const pathname = usePathname();
   const showNavbarBottom = pathname === "/product";
+  const searchBarOnUserPage = pathname.startsWith("/user");
+  console.log(searchBarOnUserPage);
+
+  useEffect(() => {
+    const navbarTop = document.getElementById("navbar-top");
+    if (searchBarOnUserPage) {
+      navbarTop.classList.add("navbar-transition");
+    } else {
+      navbarTop.classList.remove("navbar-transition");
+    }
+  }, [searchBarOnUserPage]);
 
   //Handling navbar top animation
   const { scrollY } = useScroll(
@@ -64,7 +75,7 @@ const Navbar = forwardRef(({ mobile, user }, ref) => {
       >
         <Search mobile={mobile} />
 
-        <Image
+        {/* <Image
           className="user-img"
           src="/images/user-avatar.png"
           alt=""
@@ -74,7 +85,7 @@ const Navbar = forwardRef(({ mobile, user }, ref) => {
         />
         <AnimatePresence mode="wait">
           {userModal && <UserModal user={user} />}
-        </AnimatePresence>
+        </AnimatePresence> */}
       </div>
       {!showNavbarBottom ? (
         <div

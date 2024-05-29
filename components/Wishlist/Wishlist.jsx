@@ -8,29 +8,26 @@ import React, { useState } from "react";
 const Wishlist = () => {
   const { wishlist } = useStateContext();
 
-  const [modal, setModal] = useState(false);
-
   console.log(wishlist);
 
   return (
     <div className="wishlist-container">
-      <h3 onClick={() => setModal(!modal)}>Wishlist</h3>
-      <swiper-container slides-per-view="3">
-        {wishlist.map((item) => (
-          <div className="wishlist-container__item" key={item._id}>
-            <swiper-slide>
-              <Image
-                src={urlFor(item.image[0]).toString()}
-                width={100}
-                height={100}
-                alt=""
-              />
-              <h3>{item.name}</h3>
-              <div>{item.price}</div>
-            </swiper-slide>
+      {wishlist.map((item) => (
+        <div className="wishlist-container__item" key={item._id}>
+          <Image
+            src={urlFor(item.image[0]).toString()}
+            width={100}
+            height={100}
+            alt=""
+          />
+          <div className="wishlist-container__item__details">
+            <p className="wishlist-container__item__details__name">
+              {item.name}
+            </p>
+            <h3>£{item.price}</h3>
           </div>
-        ))}
-      </swiper-container>
+        </div>
+      ))}
     </div>
   );
 };
