@@ -1,6 +1,6 @@
 "use client";
 import { AnimatePresence } from "framer-motion";
-import React from "react";
+import React, { useEffect } from "react";
 import Product from "../ProductCard/Product";
 import { useStateContext } from "@/context/StateContext";
 
@@ -8,41 +8,36 @@ const ProductsFeed = ({ products }) => {
   const { category } = useStateContext();
   console.log(products);
 
+  useEffect(() => {
+    const container = document.getElementById("products-container");
+    const matchingProducts = products.filter((item) =>
+      item.category.find((cat) => cat === category)
+    );
+    console.log(matchingProducts);
+    console.log("Matching products length", matchingProducts.length);
+    if (matchingProducts.length <= 2) {
+      container.classList.add("products-container--transition");
+    } else {
+      console.log("Removing transition classname");
+      container.classList.remove("products-container--transition");
+    }
+  }, [category]);
+
+  const matchingCategory = products.filter((product) =>
+    product.category.find((cat) => cat === category)
+  );
+
   return (
-    <div className="home-container__products">
-      <swiper-container
-        key="products-swiper"
-        slides-per-view="2"
-        space-between="20"
-        grid="true"
-        grid-fill="row"
-        grid-rows="2"
-        pagination="true"
-        style={{
-          "--swiper-pagination-top": "46%",
-          "--swiper-pagination-bullet-size": "15px",
-          "--swiper-pagination-inactive-bullet-size": "5px",
-          "--swiper-pagination-color": "rgba(70, 7, 133, 1) 0%",
-        }}
-      >
-        <AnimatePresence mode="sync">
-          {products.map((product) => {
-            return (
-              product.category.find((cat) => cat === category) && (
-                //Slides below have to have a different id than those above
-                //hence 'sec' is added
-                <swiper-slide key={`${product._id}sec`}>
-                  <Product
-                    product={product}
-                    key={`${product._id}sec`}
-                    cardSmall={true}
-                  />
-                </swiper-slide>
-              )
-            );
-          })}
-        </AnimatePresence>
-      </swiper-container>
+    <div className="home-container__products" id="products-container">
+      <AnimatePresence mode="popLayout">
+        {matchingCategory.map((product) => (
+          <Product
+            key={product._id}
+            product={product}
+            smallCard={true}
+          />
+        ))}
+      </AnimatePresence>
     </div>
   );
 };

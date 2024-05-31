@@ -52,23 +52,23 @@ export const cartProductAnimation = {
 export const productAnimation = {
   visible: {
     scale: 1,
-    opacity: 1,
+    // opacity: 1,
     transition: {
-      duration: 2,
+      duration: 0.2,
     },
   },
   hidden: {
-    scale: 0.85,
-    opacity: 0,
+    scale: 0,
+    // opacity: 0,
     transition: {
-      duration: 2,
+      duration: 0.2,
     },
   },
   exit: {
-    scale: 0.85,
-    opacity: 0,
+    scale: 0,
+    // opacity: 0,
     transition: {
-      duration: 2,
+      duration: 0.2,
     },
   },
 };

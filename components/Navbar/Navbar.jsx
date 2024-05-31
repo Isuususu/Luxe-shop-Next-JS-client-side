@@ -23,6 +23,7 @@ import { IoNotifications } from "react-icons/io5";
 import { FaUser } from "react-icons/fa";
 
 import { HiMiniHome } from "react-icons/hi2";
+import ShoppingCartIcon from "../ShoppingCartIcon/ShoppingCartIcon";
 
 const Navbar = forwardRef(({ mobile, user }, ref) => {
   Navbar.displayName = "Navbar";
@@ -74,6 +75,7 @@ const Navbar = forwardRef(({ mobile, user }, ref) => {
         } ${searchBar ? "navbar-full-width" : ""}`}
       >
         <Search mobile={mobile} />
+        {/* <ShoppingCartIcon /> */}
 
         {/* <Image
           className="user-img"

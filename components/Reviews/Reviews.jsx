@@ -7,9 +7,6 @@ import { FaRegStar } from "react-icons/fa";
 import { FaStarHalfAlt } from "react-icons/fa";
 
 const Reviews = ({ stars, ratings, cardSmall }) => {
-  // console.log(stars);
-  // console.log(ratings);
-
   const roundedRating = Math.round(stars * 2) / 2;
 
   const starsElements = Array.from({ length: 5 }, (_, index) => {
@@ -37,10 +34,7 @@ const Reviews = ({ stars, ratings, cardSmall }) => {
     } else {
       return (
         <span key={index} className="reviews-container__star">
-          <FaRegStar
-            color="#f27012"
-            fontSize={cardSmall ? "1.2rem" : "1.7rem"}
-          />
+          <FaRegStar style={{ fontSize: "1.2rem" }} />
         </span>
       ); // Render an empty star
     }

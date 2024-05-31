@@ -18,9 +18,7 @@ export default async function Index() {
 
   return (
     <div
-      className={`home-container ${
-        mobile === false ? "desktop__home-container" : ""
-      }`}
+      className={`page ${!mobile && "desktop__home-container"}`}
       id="home-container"
     >
       <h2 className="home-container__headline">Best sellers</h2>

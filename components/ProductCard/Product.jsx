@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { forwardRef } from "react";
 import { urlFor } from "../../lib/client";
 import { useStateContext } from "../../context/StateContext";
 import Image from "next/image";
@@ -11,13 +11,20 @@ import Reviews from "../Reviews/Reviews";
 //Icons
 import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
-import { FaCartPlus } from "react-icons/fa";
+import { IoBagAdd } from "react-icons/io5";
+import { FaBagShopping } from "react-icons/fa6";
+
+import { FaStar } from "react-icons/fa";
 
 //Animations
 import { motion } from "framer-motion";
 import { productAnimation } from "../../styles/animations";
 
-const Product = ({ product, cardSmall }) => {
+//Forwarding ref to first JSX element to make popLayout animation working properly
+const Product = forwardRef(function Product(
+  { product, smallCard },
+  ref
+) {
   const { addToCart, qty, wishlist, addToWishlist } =
     useStateContext();
 
@@ -36,11 +43,13 @@ const Product = ({ product, cardSmall }) => {
   );
 
   return (
-    <Link href={`/product/${product.slug.current}`}>
+    <Link
+      href={`/product/${product.slug.current}`}
+      style={{ flex: "1 1 auto", maxWidth: "calc(50% - 0.5rem)" }}
+      ref={ref}
+    >
       <motion.div
-        className={`product-card ${
-          cardSmall === true ? "small-card" : ""
-        }`}
+        className={`product-card ${smallCard && "small-card"}`}
         variants={productAnimation}
         initial="hidden"
         animate="visible"
@@ -49,26 +58,28 @@ const Product = ({ product, cardSmall }) => {
         <Image
           src={urlFor(product.image && product.image[0]).toString()}
           fill
-          className="product-card__image"
+          className={`product-card__image ${
+            smallCard && "small-card__image"
+          }`}
           alt=""
         />
-        <h2 className="product-card__title">{product.name}</h2>
-        <Reviews
-          stars={product.stars}
-          ratings={product.ratings}
-          cardSmall={cardSmall}
-        />
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <h3 className="product-card__price">£{product.price}</h3>
+
+        <h3 className="product-card__title">{product.name}</h3>
+        <div className="product-card__reviews flex-center">
+          <FaStar
+            color="#f27012"
+            fontSize={smallCard ? "1rem" : "1.3rem"}
+          />
+          <p className="product-card__reviews__stars">
+            {product.stars}
+          </p>
+        </div>
+
+        <div className="flex-center">
+          <p className="product-card__price">£{product.price}</p>
           <button className="product-card__buy-now" onClick={buyNow}>
-            <FaCartPlus
-              fontSize={cardSmall === true ? "2.3rem" : "3rem"}
+            <FaBagShopping
+              fontSize={smallCard ? "1.9rem" : "2.5rem"}
               color="#333"
             />
           </button>
@@ -79,18 +90,16 @@ const Product = ({ product, cardSmall }) => {
         >
           {itemOnWishList ? (
             <FaHeart
-              fontSize={cardSmall === true ? "1.5rem" : "2.2rem"}
+              fontSize={smallCard ? "1.5rem" : "2.2rem"}
               style={{ fill: "red" }}
             />
           ) : (
-            <FaRegHeart
-              fontSize={cardSmall === true ? "1.5rem" : "2.2rem"}
-            />
+            <FaRegHeart fontSize={smallCard ? "1.5rem" : "2.2rem"} />
           )}
         </button>
       </motion.div>
     </Link>
   );
-};
+});
 
 export default Product;

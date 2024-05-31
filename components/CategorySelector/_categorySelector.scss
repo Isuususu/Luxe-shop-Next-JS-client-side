@@ -1,14 +1,18 @@
 .category-selector {
   display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  gap: 1vh;
-  margin: 3vh auto 3vh auto;
-
+  gap: 0.3rem;
+  overflow: auto;
+  margin: 1.2rem 0 1.2rem 0;
+  &::-webkit-scrollbar {
+    display: none;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
   &__button {
     background: #fff;
     transition: all 0.5s;
-    flex-shrink: 1;
+    font-size: 1.1rem;
+    font-weight: bolder;
   }
 }
 
