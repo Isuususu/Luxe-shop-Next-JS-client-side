@@ -171,7 +171,7 @@
   display: flex;
   gap: 0.3rem;
   overflow: auto;
-  margin: 1.2rem 0 1.2rem 0;
+  margin: 0 0 1.2rem 0;
 }
 .category-selector::-webkit-scrollbar {
   display: none;
@@ -186,7 +186,7 @@
 }
 
 .selected-cat {
-  background: #600fb0;
+  background: #6033bc;
   color: #fff;
 }
 
@@ -266,11 +266,11 @@
   z-index: 15;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.15rem;
   background: rgb(255, 255, 255);
   border-radius: 20px;
   box-shadow: 0px 22px 19px -15px rgba(110, 38, 243, 0.164);
-  padding: 1.2vh;
+  padding: 0.75rem;
   position: relative;
   box-sizing: border-box;
 }
@@ -294,6 +294,7 @@
 .product-card__price {
   font-size: 1.2rem;
   color: #747474;
+  align-self: flex-start;
 }
 .product-card__buy-now {
   padding: 0;
@@ -338,21 +339,29 @@
   color: #303030;
   position: relative;
   margin: 1.2rem 0 1.2rem 0;
-  font-size: 2rem;
+  font-size: 1.6rem;
 }
-.home-container__products {
+.home-container__headline__link {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  align-items: center;
+  gap: 0.1rem;
+  margin-left: auto;
+}
+.home-container__bestsellers {
+  display: flex;
+  flex-wrap: nowrap;
   gap: 0.5rem;
+  overflow-y: auto;
+}
+.home-container__bestsellers__item {
+  flex: 0 0 65%;
+}
+.products-container--transition {
   max-height: 600px;
-  transition: all 0.3s ease-in-out;
-  overflow: auto;
-  padding-bottom: 1.4rem;
 }
 
-.products-container--transition {
-  max-height: 300px;
+.swiper-pagination {
+  position: relative !important;
 }
 
 .product-detail-container {
@@ -1179,16 +1188,8 @@ input {
   gap: 0.5rem;
 }
 
-.swiper {
-  position: relative;
-}
-
 .bestsellers-swiper {
   margin-top: 200px;
-}
-
-.swiper-pagination {
-  position: relative;
 }
 
 .sanity-container {
@@ -1233,7 +1234,7 @@ input {
   top: 100px;
   right: 0;
   padding: 10px 5px 10px 10px;
-  background: #600fb0;
+  background: #6033bc;
   border-radius: 25px 0 0 25px;
   border: 0;
 }
@@ -1247,8 +1248,8 @@ input {
   position: absolute;
   bottom: 7px;
   right: 3px;
-  background: #b33cc5;
-  color: azure;
+  background: #f27012;
+  color: #fff;
   border-radius: 180px;
   padding: 0 5px 0 5px;
 }

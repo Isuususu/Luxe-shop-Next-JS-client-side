@@ -45,7 +45,7 @@ const Product = forwardRef(function Product(
   return (
     <Link
       href={`/product/${product.slug.current}`}
-      style={{ flex: "1 1 auto", maxWidth: "calc(50% - 0.5rem)" }}
+      // style={{ flex: "1 1 auto", maxWidth: "calc(50% - 0.5rem)" }}
       ref={ref}
     >
       <motion.div

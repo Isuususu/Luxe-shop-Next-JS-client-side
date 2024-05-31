@@ -6,20 +6,20 @@ import { useMotionValueEvent, useScroll } from "framer-motion";
 const CategorySelector = () => {
   const { category, setCategory } = useStateContext();
 
-  //Handling navbar top animation
-  const { scrollY } = useScroll();
-  // mobile === false && { container: ref }
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    const navbarTop = document.getElementById("category-selector");
-    console.log(latest);
+  // //Handling navbar top animation
+  // const { scrollY } = useScroll();
+  // // mobile === false && { container: ref }
+  // useMotionValueEvent(scrollY, "change", (latest) => {
+  //   const navbarTop = document.getElementById("category-selector");
+  //   console.log(latest);
 
-    if (latest >= 100) {
-      navbarTop.classList.add("category-bar-transition");
-    }
-    // else {
-    //   navbarTop.classList.remove(" ");
-    // }
-  });
+  //   if (latest >= 100) {
+  //     navbarTop.classList.add("category-bar-transition");
+  //   }
+  //   // else {
+  //   //   navbarTop.classList.remove(" ");
+  //   // }
+  // });
 
   return (
     <div className="category-selector" id="category-selector">

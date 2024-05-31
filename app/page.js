@@ -9,6 +9,9 @@ import ProductsFeed from "../components/ProductsFeed/ProductsFeed";
 
 import { headers } from "next/headers";
 
+import { IoIosArrowForward } from "react-icons/io";
+import Link from "next/link";
+
 export default async function Index() {
   const products = await getProducts();
 
@@ -21,13 +24,21 @@ export default async function Index() {
       className={`page ${!mobile && "desktop__home-container"}`}
       id="home-container"
     >
-      <h2 className="home-container__headline">Best sellers</h2>
+      <h2 className="home-container__headline">Bestsellers</h2>
       <BestsellersFeed products={products} />
-      <h2 className="home-container__headline">Explore our shop</h2>
+      <div className="flex-center">
+        <h2 className="home-container__headline">Products</h2>
+        <Link
+          href="/products"
+          className="home-container__headline__link"
+        >
+          <p>All</p>
+          <IoIosArrowForward className="icon" />
+        </Link>
+      </div>
 
       <CategorySelector />
       <ProductsFeed products={products} />
-
       <Footer />
     </div>
   );

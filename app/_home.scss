@@ -9,31 +9,32 @@
     color: $homeHeadlineTextColor;
     position: relative;
     margin: 1.2rem 0 1.2rem 0;
-    font-size: 2rem;
-    // &::before {
-    //   z-index: -1;
-    //   position: absolute;
-    //   bottom: 0;
-    //   left: 50%;
-    //   transform: translate(-50%);
-    //   content: "";
-    //   width: 40%;
-    //   height: 13px;
-    //   background: #8f13f585;
-    // }
+    font-size: 1.6rem;
+    &__link {
+      display: flex;
+      align-items: center;
+      gap: 0.1rem;
+      margin-left: auto;
+    }
+  }
+
+  &__bestsellers {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+    overflow-y: auto;
+    &__item {
+      flex: 0 0 65%;
+    }
   }
   &__products {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 0.5rem;
-    max-height: 600px;
-    transition: all 0.3s ease-in-out;
-    overflow: auto;
-    padding-bottom: 1.4rem;
   }
 }
 
 .products-container--transition {
-  max-height: 300px;
+  max-height: 600px;
+}
+
+.swiper-pagination {
+  position: relative !important;
 }

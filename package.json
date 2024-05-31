@@ -43,6 +43,7 @@
     "react-firebase-hooks": "^5.1.1",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^5.0.1",
+    "react-multi-carousel": "^2.8.5",
     "sanity": "^3.24.1",
     "stripe": "^14.12.0",
     "styled-components": "^6.1.8",
@@ -50,8 +51,8 @@
     "supertokens-node": "^16.7.1",
     "supertokens-web-js": "^0.9.0",
     "swiper": "^11.0.5",
-    "ua-parser-js": "^1.0.37",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "ua-parser-js": "^1.0.37"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.23.3",
