@@ -3,6 +3,12 @@ import React from "react";
 import { useStateContext } from "../../context/StateContext";
 import { useMotionValueEvent, useScroll } from "framer-motion";
 
+//Icons
+import { BiSolidCategoryAlt } from "react-icons/bi";
+import { FaHeadphones } from "react-icons/fa";
+import { MdOutlineSmartphone } from "react-icons/md";
+import { IoMdWatch } from "react-icons/io";
+
 const CategorySelector = () => {
   const { category, setCategory } = useStateContext();
 
@@ -29,7 +35,10 @@ const CategorySelector = () => {
         }`}
         onClick={() => setCategory("All")}
       >
-        All
+        <div className="flex-center">
+          <BiSolidCategoryAlt style={{ fontSize: "1.5rem" }} />
+          All
+        </div>
       </button>
       <button
         className={`category-selector__button ${
@@ -37,7 +46,10 @@ const CategorySelector = () => {
         }`}
         onClick={() => setCategory("Headphones")}
       >
-        Headphones
+        <div className="flex-center">
+          <FaHeadphones style={{ fontSize: "1.5rem" }} />
+          Headphones
+        </div>
       </button>
       <button
         className={`category-selector__button ${
@@ -45,7 +57,10 @@ const CategorySelector = () => {
         }`}
         onClick={() => setCategory("Smartphones")}
       >
-        Smartphones
+        <div className="flex-center">
+          <MdOutlineSmartphone style={{ fontSize: "1.5rem" }} />
+          Smartphones
+        </div>
       </button>
       <button
         className={`category-selector__button ${
@@ -53,7 +68,10 @@ const CategorySelector = () => {
         }`}
         onClick={() => setCategory("Smartwatches")}
       >
-        Smartwatches
+        <div className="flex-center">
+          <IoMdWatch style={{ fontSize: "1.5rem" }} />
+          Smartwatches
+        </div>
       </button>
     </div>
   );

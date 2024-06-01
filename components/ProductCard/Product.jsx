@@ -43,11 +43,7 @@ const Product = forwardRef(function Product(
   );
 
   return (
-    <Link
-      href={`/product/${product.slug.current}`}
-      // style={{ flex: "1 1 auto", maxWidth: "calc(50% - 0.5rem)" }}
-      ref={ref}
-    >
+    <Link href={`/product/${product.slug.current}`} ref={ref}>
       <motion.div
         className={`product-card ${smallCard && "small-card"}`}
         variants={productAnimation}
@@ -55,48 +51,50 @@ const Product = forwardRef(function Product(
         animate="visible"
         exit="exit"
       >
-        <Image
-          src={urlFor(product.image && product.image[0]).toString()}
-          fill
-          className={`product-card__image ${
-            smallCard && "small-card__image"
-          }`}
-          alt=""
-        />
-
-        <h3 className="product-card__title">{product.name}</h3>
-        <div className="product-card__reviews flex-center">
-          <FaStar
-            color="#f27012"
-            fontSize={smallCard ? "1rem" : "1.3rem"}
+        <button className="product-card__buy-now" onClick={buyNow}>
+          <FaBagShopping
+            fontSize={smallCard ? "1.3rem" : "1.7rem"}
+            color="#333"
           />
-          <p className="product-card__reviews__stars">
-            {product.stars}
-          </p>
-        </div>
-
-        <div className="flex-center">
-          <p className="product-card__price">£{product.price}</p>
-          <button className="product-card__buy-now" onClick={buyNow}>
-            <FaBagShopping
-              fontSize={smallCard ? "1.9rem" : "2.5rem"}
-              color="#333"
-            />
+        </button>
+        <div style={{ position: "relative" }}>
+          <Image
+            src={urlFor(product.image && product.image[0]).toString()}
+            fill
+            className={`product-card__image ${
+              smallCard && "small-card__image"
+            }`}
+            alt=""
+          />
+          <button
+            className="product-card__add-to-wishlist"
+            onClick={addItemToWishlist}
+          >
+            {itemOnWishList ? (
+              <FaHeart
+                fontSize={smallCard ? "1.3rem" : "1.8rem"}
+                style={{ fill: "red" }}
+              />
+            ) : (
+              <FaRegHeart
+                fontSize={smallCard ? "1.3rem" : "1.8rem"}
+              />
+            )}
           </button>
         </div>
-        <button
-          className="product-card__add-to-wishlist"
-          onClick={addItemToWishlist}
-        >
-          {itemOnWishList ? (
-            <FaHeart
-              fontSize={smallCard ? "1.5rem" : "2.2rem"}
-              style={{ fill: "red" }}
+        <div className="flex-center">
+          <h3 className="product-card__price">£{product.price}</h3>
+          <div className="product-card__reviews flex-center">
+            <FaStar
+              color="#fcf003"
+              fontSize={smallCard ? "1rem" : "1.1rem"}
             />
-          ) : (
-            <FaRegHeart fontSize={smallCard ? "1.5rem" : "2.2rem"} />
-          )}
-        </button>
+            <p className="product-card__reviews__stars">
+              {product.stars}
+            </p>
+          </div>
+        </div>
+        <p className="product-card__title">{product.name}</p>
       </motion.div>
     </Link>
   );

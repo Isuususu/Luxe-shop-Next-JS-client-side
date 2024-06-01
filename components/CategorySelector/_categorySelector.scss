@@ -1,18 +1,18 @@
 .category-selector {
   display: flex;
   gap: 0.3rem;
-  overflow: auto;
+  overflow-y: auto;
   margin: 0 0 1.2rem 0;
-  &::-webkit-scrollbar {
-    display: none;
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-  }
+  // &::-webkit-scrollbar {
+  //   display: none;
+  //   -ms-overflow-style: none; /* IE and Edge */
+  //   scrollbar-width: none; /* Firefox */
+  // }
   &__button {
     background: #fff;
     transition: all 0.5s;
     font-size: 1.1rem;
-    font-weight: bolder;
+    padding: 0.7rem 0.9rem 0.7rem 0.9rem;
   }
 }
 
