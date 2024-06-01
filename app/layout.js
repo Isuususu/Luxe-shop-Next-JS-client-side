@@ -42,7 +42,7 @@ export default async function RootLayout({ children }) {
               <>
                 <Toaster />
                 <Navbar user={session.user} />
-                <ShoppingCartIcon />
+                {/* <ShoppingCartIcon /> */}
                 {children}
               </>
             )

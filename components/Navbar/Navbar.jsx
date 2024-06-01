@@ -75,7 +75,7 @@ const Navbar = forwardRef(({ mobile, user }, ref) => {
         } ${searchBar ? "navbar-full-width" : ""}`}
       >
         <Search mobile={mobile} />
-        {/* <ShoppingCartIcon /> */}
+        <ShoppingCartIcon />
 
         {/* <Image
           className="user-img"
