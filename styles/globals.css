@@ -294,8 +294,8 @@
 }
 .product-card__buy-now {
   position: absolute;
-  bottom: 3px;
-  right: 8px;
+  top: 0.75rem;
+  right: 0.75rem;
   padding: 0;
   background: transparent;
   z-index: 16;
@@ -303,12 +303,15 @@
 }
 .product-card__add-to-wishlist {
   position: absolute;
-  top: 0.25rem;
-  left: 0.25rem;
+  top: 0;
+  left: 0;
   background: transparent;
   padding: 0;
   border-radius: 14px;
   color: #262626;
+}
+.product-card__add-to-wishlist svg {
+  margin: 0.15rem;
 }
 
 .swiper {
@@ -365,6 +368,7 @@
   background: #f5f7fb;
   font-weight: bolder;
   color: #262626;
+  border-radius: 10px;
 }
 .home-container__banner__image {
   position: relative !important;
