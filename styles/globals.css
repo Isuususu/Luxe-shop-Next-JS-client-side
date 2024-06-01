@@ -175,6 +175,7 @@
 }
 .category-selector__button {
   background: #fff;
+  color: #262626;
   transition: all 0.5s;
   font-size: 1.1rem;
   padding: 0.7rem 0.9rem 0.7rem 0.9rem;
